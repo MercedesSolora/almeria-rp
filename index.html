@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Almería RP</title>
+
+<link rel="icon" href="https://media.discordapp.net/attachments/1471257720698175502/1475081153299091487/almeria_rp_logo.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--azul:#3b82f6;
+--azulGlow:#2563eb;
+--fondo:#070d1a;
+--gris:#9ca3af;
+--grisBox:#1e293b;
+--dorado1:#ffd700;
+--dorado2:#ffb800;
+--staffCard:#0f172a;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+scroll-behavior:smooth;
+}
+
+body{
+font-family:'Inter',sans-serif;
+background: radial-gradient(circle at center,#0f1f3d 0%,#070d1a 70%);
+color:white;
+}
+
+/* NAV */
+
+nav{
+position:fixed;
+top:0;
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 8%;
+background:rgba(0,0,0,0.35);
+backdrop-filter:blur(12px);
+border-bottom:1px solid rgba(255,255,255,0.05);
+z-index:999;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:12px;
+font-weight:700;
+letter-spacing:1px;
+}
+
+.logo img{
+height:50px;
+width:auto;
+object-fit:contain;
+}
+
+nav ul{
+display:flex;
+gap:30px;
+list-style:none;
+}
+
+nav a{
+text-decoration:none;
+color:#cbd5e1;
+font-weight:500;
+transition:0.25s;
+}
+
+nav a:hover{
+color:white;
+}
+
+.discord-btn{
+background:var(--azul);
+padding:8px 18px;
+border-radius:8px;
+color:white !important;
+box-shadow:0 0 18px rgba(59,130,246,0.6);
+}
+
+/* HERO */
+
+.hero{
+height:100vh;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding-top:120px;
+}
+
+.hero-logo{
+width:420px;
+max-width:90%;
+margin-bottom:35px;
+animation:logoGlow 3s infinite alternate;
+}
+
+@keyframes logoGlow{
+from{filter:drop-shadow(0 0 10px #3b82f6);}
+to{filter:drop-shadow(0 0 40px #3b82f6);}
+}
+
+.hero h1{
+font-family:'Orbitron';
+font-size:4.2rem;
+letter-spacing:5px;
+}
+
+.hero span{
+background:linear-gradient(90deg,var(--dorado1),var(--dorado2));
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.hero p{
+margin-top:20px;
+color:var(--gris);
+}
+
+.hero button{
+margin-top:35px;
+padding:14px 40px;
+background:var(--azul);
+border:none;
+border-radius:10px;
+font-weight:600;
+color:white;
+cursor:pointer;
+transition:0.3s;
+box-shadow:0 0 25px rgba(59,130,246,0.6);
+}
+
+.hero button:hover{
+transform:translateY(-3px);
+background:var(--azulGlow);
+}
+
+/* SECTIONS */
+
+section{
+padding:120px 10%;
+text-align:center;
+scroll-margin-top:120px;
+}
+
+h2{
+font-family:'Orbitron';
+font-size:2.5rem;
+margin-bottom:15px;
+}
+
+.section-sub{
+color:var(--gris);
+margin-bottom:50px;
+}
+
+/* CARDS */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:40px;
+}
+
+.card{
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.08);
+border-radius:18px;
+padding:35px;
+backdrop-filter:blur(20px);
+transition:0.35s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+border:1px solid var(--azul);
+}
+
+.card p{
+color:var(--gris);
+}
+
+/* STAFF */
+
+.staff-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:30px;
+max-width:1100px;
+margin:auto;
+margin-top:40px;
+}
+
+.staff-card{
+background:var(--staffCard);
+padding:35px 25px;
+border-radius:18px;
+border:1px solid rgba(255,255,255,0.05);
+transition:0.35s;
+}
+
+.staff-card:hover{
+transform:translateY(-10px);
+border:1px solid var(--azul);
+}
+
+.avatar{
+width:80px;
+height:80px;
+border-radius:50%;
+background:#374151;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:30px;
+font-weight:700;
+margin:auto;
+margin-bottom:15px;
+}
+
+.avatar img{
+width:100%;
+height:100%;
+border-radius:50%;
+object-fit:cover;
+}
+
+.role{
+margin-top:8px;
+font-size:13px;
+padding:6px 12px;
+border-radius:7px;
+display:inline-block;
+font-weight:600;
+}
+
+.coordinador{background:#1d4ed8;}
+.manager{background:#7c3aed;}
+.helper{background:#059669;}
+
+/* DISCORD */
+
+.discord-section button{
+margin-top:20px;
+padding:14px 35px;
+background:var(--azul);
+border:none;
+border-radius:10px;
+color:white;
+font-weight:600;
+cursor:pointer;
+box-shadow:0 0 25px rgba(59,130,246,0.6);
+}
+
+/* FOOTER */
+
+footer{
+padding:30px;
+text-align:center;
+color:var(--gris);
+border-top:1px solid rgba(255,255,255,0.05);
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">
+<img src="https://media.discordapp.net/attachments/1471257720698175502/1475081153299091487/almeria_rp_logo.png?ex=699c2fe0&is=699ade60&hm=c82ccd9a50aaaf15744882024842478842dc0ed5a55e0fc3eb6a4cae0397394f&=&format=webp&quality=lossless&width=1376&height=917">
+ALMERÍA RP
+</div>
+
+<ul>
+<li><a href="#inicio">Inicio</a></li>
+<li><a href="#ofrecemos">Qué ofrecemos</a></li>
+<li><a href="#normas">Normas</a></li>
+<li><a href="#staff">Staff</a></li>
+<li><a href="#discord" class="discord-btn">Discord</a></li>
+</ul>
+
+</nav>
+
+<section class="hero" id="inicio">
+
+<img src="https://media.discordapp.net/attachments/1471257720698175502/1475081153299091487/almeria_rp_logo.png?ex=699c2fe0&is=699ade60&hm=c82ccd9a50aaaf15744882024842478842dc0ed5a55e0fc3eb6a4cae0397394f&=&format=webp&quality=lossless&width=1376&height=917" class="hero-logo">
+
+<h1>ALMERÍA <span>RP</span></h1>
+
+<p>Servidor de roleplay serio y profesional.</p>
+
+<button onclick="scrollToSection('discord')">
+Entrar al Discord
+</button>
+
+</section>
+
+<section id="ofrecemos">
+
+<h2>Qué Ofrecemos</h2>
+<p class="section-sub">Una experiencia de roleplay cuidada.</p>
+
+<div class="grid">
+
+<div class="card">
+<h3>Roleplay Realista</h3>
+<p>Sistemas avanzados y normativa seria.</p>
+</div>
+
+<div class="card">
+<h3>Trabajos Oficiales</h3>
+<p>Policía, EMS, empresas y más.</p>
+</div>
+
+<div class="card">
+<h3>Eventos</h3>
+<p>Eventos organizados por la administración.</p>
+</div>
+
+</div>
+</section>
+
+<section id="normas">
+
+<h2>Normativa</h2>
+<p class="section-sub">Las bases del servidor.</p>
+
+<div class="grid">
+
+<div class="card">
+<h3>Respeto</h3>
+<p>El respeto es obligatorio entre jugadores.</p>
+</div>
+
+<div class="card">
+<h3>No romper rol</h3>
+<p>El personaje debe mantenerse siempre.</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="staff">
+
+<h2>Nuestro Staff</h2>
+<p class="section-sub">Equipo administrativo del servidor.</p>
+
+<div class="staff-grid">
+
+<div class="staff-card">
+<div class="avatar">
+<img src="https://media.discordapp.net/attachments/1471257720698175502/1475081153299091487/almeria_rp_logo.png">
+</div>
+<h3>Policia_091</h3>
+<span class="role coordinador">Coordinador</span>
+</div>
+
+<div class="staff-card">
+<div class="avatar">
+<img src="https://media.discordapp.net/attachments/1448051369377267793/1475084244672839820/IMG_2645.jpg?ex=699c32c1&is=699ae141&hm=045357c1de28d4bbc3590e1c4b8483eb28b4fbb877537b9bfd0c234e91c516c6&=&format=webp">
+</div>
+<h3>Kuemiritas</h3>
+<span class="role manager">Manager</span>
+</div>
+
+<div class="staff-card">
+<div class="avatar">
+<img src="https://media.discordapp.net/attachments/1471257720698175502/1475081153299091487/almeria_rp_logo.png">
+</div>
+<h3>Jess</h3>
+<span class="role helper">Helper</span>
+</div>
+
+<div class="staff-card">
+<div class="avatar">
+<img src="https://media.discordapp.net/attachments/1471257720698175502/1475088611815985172/image.png?ex=699c36d2&is=699ae552&hm=8fad85a15e9d102f519caf6dbcf8581fa098b5925fa869bcd8a5cd728013f414&=&format=webp&quality=lossless">
+</div>
+<h3>David Capellas</h3>
+<span class="role alta dirección">Alta Dirección</span>
+</div>
+
+<div class="staff-card">
+<div class="avatar">
+<img src="https://media.discordapp.net/attachments/1471226781473439870/1475088988581924935/ba12452172c328aea9514c2f665e9846.webp?ex=699c372c&is=699ae5ac&hm=8426652d25ddadf262b8917fd41d33fa1b8857c6a9bb73b8881aa3a6ff220705&=&format=webp">
+</div>
+<h3>Axel</h3>
+<span class="role helper">Helper</span>
+</div>
+
+<div class="staff-card">
+<div class="avatar">
+<img src="https://media.discordapp.net/attachments/1471257720698175502/1475087202538229774/image.png?ex=699c3582&is=699ae402&hm=da13bad0a6a5ed725796bad5fb2e99627b152d008b15c439ed1bc0891ddb6bdd&=&format=webp&quality=lossless&width=1007&height=1007">
+</div>
+<h3>Koix</h3>
+<span class="role jefatura">Jefatura</span>
+</div>
+
+</div>
+
+</section>
+
+<section id="discord" class="discord-section">
+
+<h2>Únete al Discord</h2>
+
+<button onclick="window.location.href='https://discord.gg/qKhhEyXrZz'">
+Entrar ahora
+</button>
+
+</section>
+
+<footer>
+© 2026 Almería RP — Todos los derechos reservados
+</footer>
+
+<script>
+function scrollToSection(id){
+const el = document.getElementById(id);
+const y = el.getBoundingClientRect().top + window.pageYOffset - 100;
+
+window.scrollTo({
+top: y,
+behavior: "smooth"
+});
+}
+
+document.querySelectorAll('nav a').forEach(anchor=>{
+anchor.addEventListener('click', function(e){
+e.preventDefault();
+const id = this.getAttribute('href').replace('#','');
+scrollToSection(id);
+});
+});
+</script>
+
+</body>
+</html>
