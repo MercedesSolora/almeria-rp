@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Almería RP</title>
 
 <link rel="icon" href="https://media.discordapp.net/attachments/1471257720698175502/1475081153299091487/almeria_rp_logo.png">
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
 :root{
 --azul:#3b82f6;
---azulGlow:#8b9ec7;
---fondo:#454f64;
---gris:#9ca3af;
---grisBox:#1e293b;
---dorado1:#ffd700;
---dorado2:#ac8522;
---staffCard:#0f172a;
+--azul2:#60a5fa;
+--azulGlow:#93c5fd;
+--fondo:#020817;
+--card:#0f172a;
+--card2:#111c31;
+--gris:#94a3b8;
+--blanco:#ffffff;
+--dorado:#facc15;
+--borde:rgba(255,255,255,0.08);
 }
 
 *{
@@ -32,8 +34,57 @@ scroll-behavior:smooth;
 
 body{
 font-family:'Inter',sans-serif;
-background: radial-gradient(circle at center,#0f1f3d 0%,#070d1a 70%);
+background:
+radial-gradient(circle at top,#18335f 0%,#081120 35%,#020617 100%);
 color:white;
+overflow-x:hidden;
+}
+
+/* PARTICLES */
+
+.particles{
+position:fixed;
+width:100%;
+height:100%;
+top:0;
+left:0;
+overflow:hidden;
+z-index:-1;
+}
+
+.particles span{
+position:absolute;
+display:block;
+width:4px;
+height:4px;
+background:white;
+border-radius:50%;
+opacity:.25;
+animation:float 15s linear infinite;
+}
+
+.particles span:nth-child(1){left:10%;animation-duration:12s;top:100%;}
+.particles span:nth-child(2){left:20%;animation-duration:18s;top:100%;}
+.particles span:nth-child(3){left:30%;animation-duration:15s;top:100%;}
+.particles span:nth-child(4){left:40%;animation-duration:20s;top:100%;}
+.particles span:nth-child(5){left:50%;animation-duration:11s;top:100%;}
+.particles span:nth-child(6){left:60%;animation-duration:16s;top:100%;}
+.particles span:nth-child(7){left:70%;animation-duration:14s;top:100%;}
+.particles span:nth-child(8){left:80%;animation-duration:22s;top:100%;}
+.particles span:nth-child(9){left:90%;animation-duration:17s;top:100%;}
+
+@keyframes float{
+0%{
+transform:translateY(0px) scale(0);
+opacity:0;
+}
+10%{
+opacity:.4;
+}
+100%{
+transform:translateY(-120vh) scale(1.5);
+opacity:0;
+}
 }
 
 /* NAV */
@@ -46,29 +97,40 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 padding:18px 8%;
-background:rgba(0,0,0,0.35);
-backdrop-filter:blur(12px);
-border-bottom:1px solid rgba(255,255,255,0.05);
+background:rgba(2,6,23,0.65);
+backdrop-filter:blur(14px);
+border-bottom:1px solid rgba(255,255,255,0.06);
 z-index:999;
+transition:.3s;
 }
 
 .logo{
 display:flex;
 align-items:center;
-gap:12px;
+gap:14px;
 font-weight:700;
-letter-spacing:1px;
+font-size:1rem;
+letter-spacing:2px;
 }
 
 .logo img{
-height:50px;
-width:auto;
-object-fit:contain;
+height:52px;
+filter:drop-shadow(0 0 15px rgba(59,130,246,.7));
+animation:spinLogo 6s ease-in-out infinite alternate;
+}
+
+@keyframes spinLogo{
+0%{
+transform:translateY(0px) rotate(-2deg);
+}
+100%{
+transform:translateY(-5px) rotate(2deg);
+}
 }
 
 nav ul{
 display:flex;
-gap:30px;
+gap:35px;
 list-style:none;
 }
 
@@ -76,7 +138,23 @@ nav a{
 text-decoration:none;
 color:#cbd5e1;
 font-weight:500;
-transition:0.25s;
+transition:.25s;
+position:relative;
+}
+
+nav a::after{
+content:"";
+position:absolute;
+left:0;
+bottom:-8px;
+width:0%;
+height:2px;
+background:var(--azul);
+transition:.3s;
+}
+
+nav a:hover::after{
+width:100%;
 }
 
 nav a:hover{
@@ -84,11 +162,10 @@ color:white;
 }
 
 .discord-btn{
-background:var(--azul);
-padding:8px 18px;
-border-radius:8px;
-color:white !important;
-box-shadow:0 0 18px rgba(94, 160, 100, 0.6);
+background:linear-gradient(135deg,var(--azul),var(--azul2));
+padding:10px 22px;
+border-radius:12px;
+box-shadow:0 0 25px rgba(59,130,246,.6);
 }
 
 /* HERO */
@@ -100,180 +177,425 @@ flex-direction:column;
 align-items:center;
 justify-content:center;
 text-align:center;
-padding-top:120px;
+padding:120px 8% 0;
+position:relative;
+}
+
+.hero::before{
+content:"";
+position:absolute;
+width:500px;
+height:500px;
+background:rgba(59,130,246,.15);
+filter:blur(120px);
+border-radius:50%;
+z-index:-1;
 }
 
 .hero-logo{
-width:420px;
+width:370px;
 max-width:90%;
+animation:logoGlow 4s infinite alternate;
 margin-bottom:35px;
-animation:logoGlow 3s infinite alternate;
 }
 
 @keyframes logoGlow{
-from{filter:drop-shadow(0 0 10px #3b82f6);}
-to{filter:drop-shadow(0 0 40px #3b82f6);}
+0%{
+filter:drop-shadow(0 0 10px #3b82f6);
+transform:translateY(0px);
+}
+100%{
+filter:drop-shadow(0 0 40px #60a5fa);
+transform:translateY(-10px);
+}
 }
 
 .hero h1{
 font-family:'Orbitron';
-font-size:4.2rem;
-letter-spacing:5px;
+font-size:5rem;
+letter-spacing:7px;
+margin-bottom:20px;
+animation:fadeUp 1s ease;
 }
 
 .hero span{
-background:linear-gradient(90deg,var(--dorado1),var(--dorado2));
+background:linear-gradient(90deg,#ffffff,#60a5fa);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
 
 .hero p{
-margin-top:20px;
+max-width:700px;
+line-height:1.7;
 color:var(--gris);
+font-size:1.1rem;
+animation:fadeUp 1.4s ease;
+}
+
+.hero-buttons{
+display:flex;
+gap:20px;
+margin-top:40px;
+flex-wrap:wrap;
+justify-content:center;
+animation:fadeUp 1.8s ease;
 }
 
 .hero button{
-margin-top:35px;
-padding:14px 40px;
-background:var(--azul);
+padding:16px 38px;
 border:none;
-border-radius:10px;
-font-weight:600;
-color:white;
+border-radius:14px;
+font-weight:700;
 cursor:pointer;
-transition:0.3s;
-box-shadow:0 0 25px rgba(59,130,246,0.6);
+transition:.3s;
+font-size:15px;
+}
+
+.primary-btn{
+background:linear-gradient(135deg,var(--azul),var(--azul2));
+color:white;
+box-shadow:0 0 35px rgba(59,130,246,.6);
+}
+
+.secondary-btn{
+background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.1);
+color:white;
+backdrop-filter:blur(10px);
 }
 
 .hero button:hover{
-transform:translateY(-3px);
-background:var(--azulGlow);
+transform:translateY(-5px) scale(1.03);
+}
+
+.stats{
+margin-top:70px;
+display:flex;
+gap:30px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.stat-box{
+background:rgba(255,255,255,.04);
+padding:25px 40px;
+border-radius:20px;
+border:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(15px);
+min-width:180px;
+transition:.3s;
+}
+
+.stat-box:hover{
+transform:translateY(-8px);
+border-color:var(--azul);
+}
+
+.stat-box h2{
+font-size:2.2rem;
+color:var(--azulGlow);
+font-family:'Orbitron';
+}
+
+.stat-box p{
+margin-top:10px;
+font-size:.95rem;
 }
 
 /* SECTIONS */
 
 section{
 padding:120px 10%;
-text-align:center;
-scroll-margin-top:120px;
+position:relative;
 }
 
-h2{
+.section-title{
+text-align:center;
+margin-bottom:70px;
+}
+
+.section-title h2{
+font-size:3rem;
 font-family:'Orbitron';
-font-size:2.5rem;
 margin-bottom:15px;
 }
 
-.section-sub{
+.section-title p{
 color:var(--gris);
-margin-bottom:50px;
 }
 
-/* CARDS */
+/* GRID */
 
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:40px;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:35px;
 }
 
 .card{
-background:rgba(255,255,255,0.05);
-border:1px solid rgba(255,255,255,0.08);
-border-radius:18px;
-padding:35px;
-backdrop-filter:blur(20px);
-transition:0.35s;
+background:linear-gradient(145deg,var(--card),var(--card2));
+padding:40px;
+border-radius:24px;
+border:1px solid var(--borde);
+transition:.4s;
+position:relative;
+overflow:hidden;
+}
+
+.card::before{
+content:"";
+position:absolute;
+top:-100%;
+left:-100%;
+width:250px;
+height:250px;
+background:rgba(59,130,246,.15);
+border-radius:50%;
+transition:.5s;
+}
+
+.card:hover::before{
+top:-40px;
+left:-40px;
 }
 
 .card:hover{
-transform:translateY(-8px);
-border:1px solid var(--azul);
+transform:translateY(-12px);
+border-color:var(--azul);
+box-shadow:0 0 35px rgba(59,130,246,.15);
+}
+
+.card h3{
+font-size:1.4rem;
+margin-bottom:15px;
 }
 
 .card p{
 color:var(--gris);
+line-height:1.7;
 }
 
 /* STAFF */
 
 .staff-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:30px;
-max-width:1100px;
-margin:auto;
-margin-top:40px;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:35px;
 }
 
 .staff-card{
-background:var(--staffCard);
-padding:35px 25px;
-border-radius:18px;
-border:1px solid rgba(255,255,255,0.05);
-transition:0.35s;
+background:linear-gradient(145deg,#0f172a,#111827);
+padding:35px;
+border-radius:24px;
+text-align:center;
+border:1px solid rgba(255,255,255,.06);
+transition:.35s;
+position:relative;
+overflow:hidden;
+}
+
+.staff-card::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:5px;
+background:linear-gradient(90deg,var(--azul),#60a5fa);
 }
 
 .staff-card:hover{
-transform:translateY(-10px);
-border:1px solid var(--azul);
+transform:translateY(-10px) scale(1.02);
+border-color:var(--azul);
 }
 
 .avatar{
-width:80px;
-height:80px;
-border-radius:50%;
-background:#374151;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:30px;
-font-weight:700;
+width:100px;
+height:100px;
 margin:auto;
-margin-bottom:15px;
+border-radius:50%;
+overflow:hidden;
+border:3px solid rgba(59,130,246,.5);
+box-shadow:0 0 25px rgba(59,130,246,.4);
+margin-bottom:20px;
 }
 
 .avatar img{
 width:100%;
 height:100%;
-border-radius:50%;
 object-fit:cover;
 }
 
-.role{
-margin-top:8px;
-font-size:13px;
-padding:6px 12px;
-border-radius:7px;
-display:inline-block;
-font-weight:600;
+.staff-card h3{
+margin-bottom:10px;
+font-size:1.3rem;
 }
 
-.coordinador{background:#1d4ed8;}
-.manager{background:#7c3aed;}
-.helper{background:#059669;}
+.role{
+display:inline-block;
+padding:8px 18px;
+border-radius:12px;
+font-size:13px;
+font-weight:700;
+margin-top:8px;
+}
+
+.dueno{
+background:#dc2626;
+}
+
+.codueno{
+background:#2563eb;
+}
+
+.admin{
+background:#7c3aed;
+}
 
 /* DISCORD */
 
-.discord-section button{
-margin-top:20px;
-padding:14px 35px;
-background:var(--azul);
+.discord-box{
+max-width:850px;
+margin:auto;
+background:linear-gradient(145deg,#111827,#0f172a);
+padding:60px;
+border-radius:30px;
+border:1px solid rgba(255,255,255,.08);
+position:relative;
+overflow:hidden;
+}
+
+.discord-box::before{
+content:"";
+position:absolute;
+width:350px;
+height:350px;
+background:rgba(59,130,246,.18);
+border-radius:50%;
+filter:blur(100px);
+top:-120px;
+right:-120px;
+}
+
+.discord-box h2{
+font-size:3rem;
+font-family:'Orbitron';
+margin-bottom:20px;
+}
+
+.discord-box p{
+color:var(--gris);
+line-height:1.8;
+max-width:650px;
+margin:auto;
+}
+
+.discord-box button{
+margin-top:35px;
+padding:16px 45px;
 border:none;
-border-radius:10px;
-color:white;
-font-weight:600;
+border-radius:14px;
+font-weight:700;
+font-size:16px;
 cursor:pointer;
-box-shadow:0 0 25px rgba(59,130,246,0.6);
+background:linear-gradient(135deg,var(--azul),var(--azul2));
+color:white;
+transition:.3s;
+box-shadow:0 0 35px rgba(59,130,246,.45);
+}
+
+.discord-box button:hover{
+transform:translateY(-6px) scale(1.03);
 }
 
 /* FOOTER */
 
 footer{
-padding:30px;
+padding:35px;
 text-align:center;
 color:var(--gris);
-border-top:1px solid rgba(255,255,255,0.05);
+border-top:1px solid rgba(255,255,255,.05);
+background:#020617;
+}
+
+/* ANIMATIONS */
+
+.fade{
+opacity:0;
+transform:translateY(40px);
+transition:1s;
+}
+
+.fade.show{
+opacity:1;
+transform:translateY(0px);
+}
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(40px);
+}
+to{
+opacity:1;
+transform:translateY(0px);
+}
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.hero h1{
+font-size:3rem;
+}
+
+nav{
+padding:18px 5%;
+}
+
+nav ul{
+gap:18px;
+font-size:14px;
+}
+
+.stats{
+gap:15px;
+}
+
+.stat-box{
+min-width:140px;
+padding:20px;
+}
+
+section{
+padding:100px 6%;
+}
+
+.discord-box{
+padding:40px 25px;
+}
+
+}
+
+@media(max-width:700px){
+
+nav ul{
+display:none;
+}
+
+.hero h1{
+font-size:2.5rem;
+}
+
+.hero-logo{
+width:280px;
+}
+
+.section-title h2{
+font-size:2.2rem;
+}
+
 }
 
 </style>
@@ -281,17 +603,28 @@ border-top:1px solid rgba(255,255,255,0.05);
 
 <body>
 
+<div class="particles">
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+</div>
+
 <nav>
 
 <div class="logo">
-<img src="https://media.discordapp.net/attachments/1471257720698175502/1475081153299091487/almeria_rp_logo.png?ex=699c2fe0&is=699ade60&hm=c82ccd9a50aaaf15744882024842478842dc0ed5a55e0fc3eb6a4cae0397394f&=&format=webp&quality=lossless&width=1376&height=917">
+<img src="https://media.discordapp.net/attachments/1471257720698175502/1475081153299091487/almeria_rp_logo.png">
 ALMERÍA RP
 </div>
 
 <ul>
 <li><a href="#inicio">Inicio</a></li>
-<li><a href="#ofrecemos">Qué ofrecemos</a></li>
-<li><a href="#normas">Normas</a></li>
+<li><a href="#ofrecemos">Servidor</a></li>
 <li><a href="#staff">Staff</a></li>
 <li><a href="#discord" class="discord-btn">Discord</a></li>
 </ul>
@@ -300,58 +633,76 @@ ALMERÍA RP
 
 <section class="hero" id="inicio">
 
-<img src="https://media.discordapp.net/attachments/1471257720698175502/1475081153299091487/almeria_rp_logo.png?ex=699c2fe0&is=699ade60&hm=c82ccd9a50aaaf15744882024842478842dc0ed5a55e0fc3eb6a4cae0397394f&=&format=webp&quality=lossless&width=1376&height=917" class="hero-logo">
-
 <h1>ALMERÍA <span>RP</span></h1>
+<h1 {style="font-size:0.3rem; margin-bottom:60px; color:var(--azulGlow); font-family:'Retroica'; letter-spacing:3px; animation:fadeUp 1.6s ease;">COMUNIDAD</h1>
 
-<p>Servidor de roleplay serio y profesional.</p>
 
-<button onclick="scrollToSection('discord')">
-Entrar al Discord
+<p>
+La experiencia definitiva de roleplay serio, profesional y realista.
+Un servidor diseñado para ofrecer calidad, organización y diversión.
+</p>
+
+<div class="hero-buttons">
+
+<button class="primary-btn" onclick="scrollToSection('discord')">
+ENTRAR AL DISCORD
 </button>
+
+<button class="secondary-btn" onclick="scrollToSection('ofrecemos')">
+VER MÁS
+</button>
+
+</div>
+
+<div class="stats">
+
+<div class="stat-box">
+<h2>24/7</h2>
+<p>Servidor activo</p>
+</div>
+
+<div class="stat-box">
+<h2>+100</h2>
+<p>Usuarios diarios</p>
+</div>
+
+<div class="stat-box">
+<h2>TOP</h2>
+<p>Experiencia RP</p>
+</div>
+
+</div>
 
 </section>
 
 <section id="ofrecemos">
 
-<h2>Qué Ofrecemos</h2>
-<p class="section-sub">Una experiencia de roleplay cuidada.</p>
+<div class="section-title fade">
+<h2>¿Qué Ofrecemos?</h2>
+<p>Un entorno realista y profesional.</p>
+</div>
 
 <div class="grid">
 
-<div class="card">
-<h3>Roleplay Realista</h3>
-<p>Sistemas avanzados y normativa seria.</p>
+<div class="card fade">
+<h3>🎭 Roleplay Realista</h3>
+<p>
+Normativas avanzadas, sistemas optimizados y una comunidad seria enfocada en el roleplay de calidad.
+</p>
 </div>
 
-<div class="card">
-<h3>Trabajos Oficiales</h3>
-<p>Policía, EMS, empresas y más.</p>
+<div class="card fade">
+<h3>🚔 Trabajos Oficiales</h3>
+<p>
+Policía, EMS, mecánicos, empresas privadas y muchas más oportunidades para desarrollar tu personaje.
+</p>
 </div>
 
-<div class="card">
-<h3>Eventos</h3>
-<p>Eventos organizados por la administración.</p>
-</div>
-
-</div>
-</section>
-
-<section id="normas">
-
-<h2>Normativa</h2>
-<p class="section-sub">Las bases del servidor.</p>
-
-<div class="grid">
-
-<div class="card">
-<h3>Respeto</h3>
-<p>El respeto es obligatorio entre jugadores.</p>
-</div>
-
-<div class="card">
-<h3>No romper rol</h3>
-<p>El personaje debe mantenerse siempre.</p>
+<div class="card fade">
+<h3>🎉 Eventos Exclusivos</h3>
+<p>
+Conciertos, carreras ilegales, eventos administrativos y experiencias únicas todas las semanas.
+</p>
 </div>
 
 </div>
@@ -360,70 +711,75 @@ Entrar al Discord
 
 <section id="staff">
 
+<div class="section-title fade">
 <h2>Nuestro Staff</h2>
-<p class="section-sub">Equipo administrativo del servidor.</p>
+<p>El equipo encargado de mantener la calidad del servidor.</p>
+</div>
 
 <div class="staff-grid">
 
-<div class="staff-card">
+<div class="staff-card fade">
+
 <div class="avatar">
-<img src="https://media.discordapp.net/attachments/1462127114294919445/1476941705214427249/copilot_image_1771776740612.jpg?ex=69a597a6&is=69a44626&hm=4a6c3a654d358119aa780228ce49fa6dee4f2173463f2a5e443f0817499bfa94&=&format=webp&width=939&height=939">
+<img src="https://media.discordapp.net/attachments/1462127114294919445/1476941705214427249/copilot_image_1771776740612.jpg">
 </div>
+
 <h3>Policia_091</h3>
-<span class="role coordinador">Coordinador</span>
+
+<span class="role dueno">
+DUEÑO
+</span>
+
 </div>
 
-<div class="staff-card">
+<div class="staff-card fade">
+
 <div class="avatar">
-<img src="https://media.discordapp.net/attachments/1448051369377267793/1475084244672839820/IMG_2645.jpg?ex=69a2ca41&is=69a178c1&hm=63169ec22737a54489065a79ccca6eb6fa451fe1c9ebbdf6d9b1061167b0df13&=&format=webp&width=614&height=598">
+<img src="https://media.discordapp.net/attachments/1448051369377267793/1475084244672839820/IMG_2645.jpg">
 </div>
+
 <h3>Kuemiritas</h3>
-<span class="role manager">Manager</span>
+
+<span class="role codueno">
+CO DUEÑO
+</span>
+
 </div>
 
-<div class="staff-card">
+<div class="staff-card fade">
+
 <div class="avatar">
-<img src="https://media.discordapp.net/attachments/1471257720698175502/1477677506793570478/image.png?ex=69a5a1eb&is=69a4506b&hm=e969692d1cd7b5a6b58a3137424577efd5a824b5832eb67ebf9fefaeee58f891&=&format=webp&quality=lossless&width=288&height=288">
-</div>
-<h3>Jess</h3>
-<span class="role helper">Helper</span>
+<img src="https://media.discordapp.net/attachments/1448051369377267793/1475084244672839820/IMG_2645.jpg">
 </div>
 
-<div class="staff-card">
-<div class="avatar">
-<img src="https://media.discordapp.net/attachments/1471257720698175502/1475088611815985172/image.png?ex=69a2ce52&is=69a17cd2&hm=3456c68ea07d4f3e6e245ab2058e1dc16eaa19ebe200a58d501e00ca3256c825&=&format=webp&quality=lossless&width=205&height=205">
-</div>
-<h3>David Capellas</h3>
-<span class="role alta dirección">Alta Dirección</span>
-</div>
+<h3>Raúl</h3>
 
-<div class="staff-card">
-<div class="avatar">
-<img src="https://media.discordapp.net/attachments/1471226781473439870/1475088988581924935/ba12452172c328aea9514c2f665e9846.webp?ex=69a2ceac&is=69a17d2c&hm=4f1690a7045737e396603f7e0d651ada6140151e91e4de1981d0a32aa0a0ada9&=&format=webp&width=178&height=178">
-</div>
-<h3>Axel</h3>
-<span class="role helper">Helper</span>
-</div>
+<span class="role admin">
+ADMIN
+</span>
 
-<div class="staff-card">
-<div class="avatar">
-<img src="https://media.discordapp.net/attachments/1471257720698175502/1475087202538229774/image.png?ex=69a2cd02&is=69a17b82&hm=d0710a11b888a4192601c1220761ae9f7311a6e0eb2d8f975848989bcc4b7281&=&format=webp&quality=lossless&width=819&height=819">
-</div>
-<h3>Koix</h3>
-<span class="role jefatura">Jefatura</span>
 </div>
 
 </div>
 
 </section>
 
-<section id="discord" class="discord-section">
+<section id="discord">
 
-<h2>Únete al Discord</h2>
+<div class="discord-box fade">
 
-<button onclick="window.location.href='https://discord.gg/qKhhEyXrZz'">
-Entrar ahora
+<h2>ÚNETE AHORA</h2>
+
+<p>
+Forma parte de una de las comunidades de roleplay más profesionales y activas.
+Tu historia comienza aquí.
+</p>
+
+<button onclick="window.location.href='https://discord.gg/wuTkHxs8Tz'">
+ENTRAR AL DISCORD
 </button>
+
+</div>
 
 </section>
 
@@ -432,23 +788,78 @@ Entrar ahora
 </footer>
 
 <script>
+
+/* SCROLL */
+
 function scrollToSection(id){
+
 const el = document.getElementById(id);
-const y = el.getBoundingClientRect().top + window.pageYOffset - 100;
+
+const y = el.getBoundingClientRect().top + window.pageYOffset - 90;
 
 window.scrollTo({
-top: y,
-behavior: "smooth"
+top:y,
+behavior:"smooth"
 });
+
 }
 
+/* NAV LINKS */
+
 document.querySelectorAll('nav a').forEach(anchor=>{
+
 anchor.addEventListener('click', function(e){
+
 e.preventDefault();
+
 const id = this.getAttribute('href').replace('#','');
+
 scrollToSection(id);
+
 });
+
 });
+
+/* SCROLL ANIMATIONS */
+
+const observer = new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.classList.add('show');
+
+}
+
+});
+
+},{threshold:.15});
+
+document.querySelectorAll('.fade').forEach(el=>{
+
+observer.observe(el);
+
+});
+
+/* NAV BACKGROUND */
+
+window.addEventListener("scroll",()=>{
+
+const nav = document.querySelector("nav");
+
+if(window.scrollY > 50){
+
+nav.style.background = "rgba(2,6,23,0.88)";
+
+}else{
+
+nav.style.background = "rgba(2,6,23,0.65)";
+
+}
+
+});
+
 </script>
 
 </body>
