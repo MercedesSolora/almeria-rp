@@ -1,28 +1,38 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Almería RP - Servidor ERLC Roleplay serio, profesional y ultra inmersivo.">
+<meta name="keywords" content="ERLC, Roleplay, Almería RP, GTA V RP, servidor RP">
+<meta name="author" content="Almería RP">
 
-<title>Almería RP</title>
+<title>Almería RP | Next Generation Roleplay</title>
 
-<link rel="icon" href="https://media.discordapp.net/attachments/1471257720698175502/1475081153299091487/almeria_rp_logo.png">
+<link rel="icon" href="https://media.discordapp.net/attachments/1472555842925629491/1506290848466341999/almeria_rp_logo.png?ex=6a13a8eb&is=6a12576b&hm=5296b7c9b71550e0d1c143308cb8ea1375abafae4309c9f477620273daa0d4f0&=&format=webp&quality=lossless&width=1330&height=887">
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css"/>
+
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
 
 <style>
 
 :root{
---azul:#3b82f6;
---azul2:#60a5fa;
---azulGlow:#93c5fd;
---fondo:#020817;
---card:#0f172a;
---card2:#111c31;
---gris:#94a3b8;
---blanco:#ffffff;
---dorado:#facc15;
---borde:rgba(255,255,255,0.08);
+--primary:#3b82f6;
+--primary2:#60a5fa;
+--cyan:#38bdf8;
+--dark:#030712;
+--dark2:#071122;
+--glass:rgba(255,255,255,.05);
+--border:rgba(255,255,255,.08);
+--text:#ffffff;
+--gray:#94a3b8;
+--success:#22c55e;
+--warning:#facc15;
+--danger:#ef4444;
+--shadow:0 0 40px rgba(59,130,246,.25);
 }
 
 *{
@@ -35,277 +45,379 @@ scroll-behavior:smooth;
 body{
 font-family:'Inter',sans-serif;
 background:
-radial-gradient(circle at top,#18335f 0%,#081120 35%,#020617 100%);
-color:white;
+radial-gradient(circle at top left,#0f2f5e 0%,transparent 30%),
+radial-gradient(circle at top right,#0a1d44 0%,transparent 25%),
+linear-gradient(180deg,#020617 0%,#020817 100%);
+color:var(--text);
 overflow-x:hidden;
 }
 
-/* PARTICLES */
-
-.particles{
+#tsparticles{
 position:fixed;
+inset:0;
+z-index:-10;
+}
+
+::selection{
+background:var(--primary);
+color:white;
+}
+
+body::-webkit-scrollbar{
+width:8px;
+}
+
+body::-webkit-scrollbar-thumb{
+background:linear-gradient(var(--primary),var(--cyan));
+border-radius:20px;
+}
+
+.preloader{
+position:fixed;
+inset:0;
+background:#020617;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:999999;
+transition:1s;
+}
+
+.preloader.hide{
+opacity:0;
+visibility:hidden;
+}
+
+.loader-logo{
+width:160px;
+animation:floatLogo 2s ease-in-out infinite alternate;
+filter:drop-shadow(0 0 25px rgba(59,130,246,.8));
+}
+
+.loading-bar{
+margin-top:35px;
+width:280px;
+height:7px;
+background:rgba(255,255,255,.08);
+border-radius:50px;
+overflow:hidden;
+position:relative;
+}
+
+.loading-bar span{
+position:absolute;
+left:-100%;
+top:0;
 width:100%;
 height:100%;
-top:0;
-left:0;
-overflow:hidden;
-z-index:-1;
+background:linear-gradient(90deg,var(--primary),var(--cyan));
+animation:loading 2s infinite;
 }
 
-.particles span{
-position:absolute;
-display:block;
-width:4px;
-height:4px;
-background:white;
-border-radius:50%;
-opacity:.25;
-animation:float 15s linear infinite;
+@keyframes loading{
+100%{
+left:100%;
+}
 }
 
-.particles span:nth-child(1){left:10%;animation-duration:12s;top:100%;}
-.particles span:nth-child(2){left:20%;animation-duration:18s;top:100%;}
-.particles span:nth-child(3){left:30%;animation-duration:15s;top:100%;}
-.particles span:nth-child(4){left:40%;animation-duration:20s;top:100%;}
-.particles span:nth-child(5){left:50%;animation-duration:11s;top:100%;}
-.particles span:nth-child(6){left:60%;animation-duration:16s;top:100%;}
-.particles span:nth-child(7){left:70%;animation-duration:14s;top:100%;}
-.particles span:nth-child(8){left:80%;animation-duration:22s;top:100%;}
-.particles span:nth-child(9){left:90%;animation-duration:17s;top:100%;}
-
-@keyframes float{
+@keyframes floatLogo{
 0%{
-transform:translateY(0px) scale(0);
-opacity:0;
-}
-10%{
-opacity:.4;
+transform:translateY(0px);
 }
 100%{
-transform:translateY(-120vh) scale(1.5);
-opacity:0;
+transform:translateY(-12px);
 }
 }
 
-/* NAV */
-
-nav{
+.navbar{
 position:fixed;
 top:0;
+left:0;
 width:100%;
+padding:18px 7%;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:18px 8%;
-background:rgba(2,6,23,0.65);
-backdrop-filter:blur(14px);
-border-bottom:1px solid rgba(255,255,255,0.06);
-z-index:999;
-transition:.3s;
+background:rgba(3,7,18,.72);
+backdrop-filter:blur(18px);
+border-bottom:1px solid rgba(255,255,255,.06);
+z-index:9999;
 }
 
 .logo{
 display:flex;
 align-items:center;
-gap:14px;
-font-weight:700;
-font-size:1rem;
+gap:15px;
+font-family:'Orbitron';
+font-weight:800;
 letter-spacing:2px;
+font-size:1rem;
 }
 
 .logo img{
-height:52px;
-filter:drop-shadow(0 0 15px rgba(59,130,246,.7));
-animation:spinLogo 6s ease-in-out infinite alternate;
+width:62px;
+position:relative;
+filter:
+drop-shadow(0 0 8px #3b82f6)
+drop-shadow(0 0 22px rgba(96,165,250,.8));
+animation:hologram 4s infinite alternate;
 }
 
-@keyframes spinLogo{
+@keyframes hologram{
 0%{
 transform:translateY(0px) rotate(-2deg);
+filter:
+drop-shadow(0 0 10px #3b82f6)
+drop-shadow(0 0 25px rgba(59,130,246,.7));
 }
 100%{
-transform:translateY(-5px) rotate(2deg);
+transform:translateY(-6px) rotate(2deg);
+filter:
+drop-shadow(0 0 20px #60a5fa)
+drop-shadow(0 0 45px rgba(96,165,250,1));
 }
 }
 
-nav ul{
+.nav-links{
 display:flex;
 gap:35px;
 list-style:none;
+align-items:center;
 }
 
-nav a{
+.nav-links a{
 text-decoration:none;
-color:#cbd5e1;
+color:#dbeafe;
 font-weight:500;
-transition:.25s;
 position:relative;
+transition:.3s;
 }
 
-nav a::after{
+.nav-links a::after{
 content:"";
 position:absolute;
 left:0;
 bottom:-8px;
 width:0%;
 height:2px;
-background:var(--azul);
-transition:.3s;
+background:linear-gradient(90deg,var(--primary),var(--cyan));
+transition:.35s;
 }
 
-nav a:hover::after{
+.nav-links a:hover::after{
 width:100%;
 }
 
-nav a:hover{
+.nav-links a:hover{
 color:white;
 }
 
 .discord-btn{
-background:linear-gradient(135deg,var(--azul),var(--azul2));
-padding:10px 22px;
-border-radius:12px;
-box-shadow:0 0 25px rgba(59,130,246,.6);
+padding:12px 22px;
+border-radius:14px;
+background:linear-gradient(135deg,var(--primary),var(--primary2));
+box-shadow:
+0 0 20px rgba(59,130,246,.4),
+0 0 50px rgba(59,130,246,.2);
 }
 
-/* HERO */
-
 .hero{
-height:100vh;
+min-height:100vh;
 display:flex;
-flex-direction:column;
 align-items:center;
 justify-content:center;
 text-align:center;
-padding:120px 8% 0;
+padding:180px 8% 100px;
 position:relative;
 }
 
 .hero::before{
 content:"";
 position:absolute;
-width:500px;
-height:500px;
+width:600px;
+height:600px;
 background:rgba(59,130,246,.15);
-filter:blur(120px);
+filter:blur(130px);
 border-radius:50%;
 z-index:-1;
 }
 
-.hero-logo{
-width:370px;
-max-width:90%;
-animation:logoGlow 4s infinite alternate;
-margin-bottom:35px;
+.hero-content{
+max-width:1200px;
 }
 
-@keyframes logoGlow{
+.hero-logo{
+width:420px;
+max-width:95%;
+margin-bottom:30px;
+position:relative;
+animation:heroFloat 4s ease-in-out infinite alternate;
+filter:
+drop-shadow(0 0 20px rgba(59,130,246,.9))
+drop-shadow(0 0 70px rgba(96,165,250,.6));
+}
+
+.hero-logo::after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(
+180deg,
+transparent 0%,
+rgba(255,255,255,.15) 45%,
+transparent 100%
+);
+animation:scan 4s linear infinite;
+}
+
+@keyframes scan{
 0%{
-filter:drop-shadow(0 0 10px #3b82f6);
-transform:translateY(0px);
+transform:translateY(-100%);
 }
 100%{
-filter:drop-shadow(0 0 40px #60a5fa);
-transform:translateY(-10px);
+transform:translateY(100%);
+}
+}
+
+@keyframes heroFloat{
+100%{
+transform:translateY(-14px);
 }
 }
 
 .hero h1{
 font-family:'Orbitron';
-font-size:5rem;
-letter-spacing:7px;
-margin-bottom:20px;
-animation:fadeUp 1s ease;
-}
-
-.hero span{
-background:linear-gradient(90deg,#ffffff,#60a5fa);
+font-size:6rem;
+font-weight:900;
+letter-spacing:8px;
+line-height:1;
+margin-bottom:25px;
+background:linear-gradient(90deg,#fff,#60a5fa);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
+text-shadow:0 0 30px rgba(59,130,246,.4);
 }
 
 .hero p{
-max-width:700px;
-line-height:1.7;
-color:var(--gris);
-font-size:1.1rem;
-animation:fadeUp 1.4s ease;
+font-size:1.15rem;
+max-width:850px;
+margin:auto;
+line-height:1.9;
+color:var(--gray);
 }
 
 .hero-buttons{
+margin-top:45px;
 display:flex;
+justify-content:center;
 gap:20px;
-margin-top:40px;
 flex-wrap:wrap;
-justify-content:center;
-animation:fadeUp 1.8s ease;
 }
 
-.hero button{
-padding:16px 38px;
+.btn{
+padding:17px 34px;
 border:none;
-border-radius:14px;
-font-weight:700;
 cursor:pointer;
-transition:.3s;
+border-radius:16px;
+font-weight:700;
 font-size:15px;
+transition:.35s;
+position:relative;
+overflow:hidden;
 }
 
-.primary-btn{
-background:linear-gradient(135deg,var(--azul),var(--azul2));
+.btn::before{
+content:"";
+position:absolute;
+top:0;
+left:-120%;
+width:80%;
+height:100%;
+background:linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.3),
+transparent
+);
+transform:skewX(-20deg);
+transition:.7s;
+}
+
+.btn:hover::before{
+left:130%;
+}
+
+.primary{
+background:linear-gradient(135deg,var(--primary),var(--cyan));
 color:white;
-box-shadow:0 0 35px rgba(59,130,246,.6);
+box-shadow:0 0 35px rgba(59,130,246,.5);
 }
 
-.secondary-btn{
-background:rgba(255,255,255,.06);
-border:1px solid rgba(255,255,255,.1);
-color:white;
-backdrop-filter:blur(10px);
-}
-
-.hero button:hover{
-transform:translateY(-5px) scale(1.03);
-}
-
-.stats{
-margin-top:70px;
-display:flex;
-gap:30px;
-flex-wrap:wrap;
-justify-content:center;
-}
-
-.stat-box{
-background:rgba(255,255,255,.04);
-padding:25px 40px;
-border-radius:20px;
+.secondary{
+background:rgba(255,255,255,.05);
+backdrop-filter:blur(14px);
 border:1px solid rgba(255,255,255,.08);
-backdrop-filter:blur(15px);
-min-width:180px;
-transition:.3s;
+color:white;
 }
 
-.stat-box:hover{
-transform:translateY(-8px);
-border-color:var(--azul);
+.btn:hover{
+transform:translateY(-6px) scale(1.03);
 }
 
-.stat-box h2{
-font-size:2.2rem;
-color:var(--azulGlow);
+.hero-stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+margin-top:70px;
+}
+
+.glass-card{
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(18px);
+border-radius:24px;
+position:relative;
+overflow:hidden;
+}
+
+.glass-card::before{
+content:"";
+position:absolute;
+inset:-1px;
+background:linear-gradient(
+135deg,
+rgba(59,130,246,.4),
+transparent,
+rgba(96,165,250,.2)
+);
+z-index:-1;
+}
+
+.stat-card{
+padding:35px;
+transition:.4s;
+transform-style:preserve-3d;
+}
+
+.stat-card:hover{
+transform:translateY(-12px) rotateX(5deg) rotateY(-5deg);
+box-shadow:var(--shadow);
+}
+
+.stat-card h2{
 font-family:'Orbitron';
+font-size:2.6rem;
+color:#93c5fd;
+margin-bottom:10px;
 }
 
-.stat-box p{
-margin-top:10px;
-font-size:.95rem;
+.stat-card p{
+color:var(--gray);
 }
-
-/* SECTIONS */
 
 section{
-padding:120px 10%;
+padding:120px 8%;
 position:relative;
 }
 
@@ -314,318 +426,348 @@ text-align:center;
 margin-bottom:70px;
 }
 
+.section-title span{
+display:inline-block;
+padding:8px 18px;
+border-radius:30px;
+background:rgba(59,130,246,.12);
+border:1px solid rgba(59,130,246,.25);
+color:#93c5fd;
+font-size:.85rem;
+margin-bottom:18px;
+}
+
 .section-title h2{
-font-size:3rem;
 font-family:'Orbitron';
+font-size:3.5rem;
 margin-bottom:15px;
 }
 
 .section-title p{
-color:var(--gris);
-}
-
-/* GRID */
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:35px;
-}
-
-.card{
-background:linear-gradient(145deg,var(--card),var(--card2));
-padding:40px;
-border-radius:24px;
-border:1px solid var(--borde);
-transition:.4s;
-position:relative;
-overflow:hidden;
-}
-
-.card::before{
-content:"";
-position:absolute;
-top:-100%;
-left:-100%;
-width:250px;
-height:250px;
-background:rgba(59,130,246,.15);
-border-radius:50%;
-transition:.5s;
-}
-
-.card:hover::before{
-top:-40px;
-left:-40px;
-}
-
-.card:hover{
-transform:translateY(-12px);
-border-color:var(--azul);
-box-shadow:0 0 35px rgba(59,130,246,.15);
-}
-
-.card h3{
-font-size:1.4rem;
-margin-bottom:15px;
-}
-
-.card p{
-color:var(--gris);
-line-height:1.7;
-}
-
-/* STAFF */
-
-.staff-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:35px;
-}
-
-.staff-card{
-background:linear-gradient(145deg,#0f172a,#111827);
-padding:35px;
-border-radius:24px;
-text-align:center;
-border:1px solid rgba(255,255,255,.06);
-transition:.35s;
-position:relative;
-overflow:hidden;
-}
-
-.staff-card::before{
-content:"";
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:5px;
-background:linear-gradient(90deg,var(--azul),#60a5fa);
-}
-
-.staff-card:hover{
-transform:translateY(-10px) scale(1.02);
-border-color:var(--azul);
-}
-
-.avatar{
-width:100px;
-height:100px;
+max-width:700px;
 margin:auto;
-border-radius:50%;
+line-height:1.8;
+color:var(--gray);
+}
+
+.features-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:30px;
+}
+
+.feature-card{
+padding:40px;
+transition:.45s;
+transform-style:preserve-3d;
+}
+
+.feature-card:hover{
+transform:rotateX(6deg) rotateY(-6deg) translateY(-10px);
+box-shadow:
+0 0 40px rgba(59,130,246,.15),
+0 0 80px rgba(59,130,246,.1);
+}
+
+.feature-icon{
+font-size:3rem;
+margin-bottom:25px;
+}
+
+.feature-card h3{
+font-size:1.5rem;
+margin-bottom:18px;
+}
+
+.feature-card p{
+color:var(--gray);
+line-height:1.8;
+}
+
+.server-status{
+display:grid;
+grid-template-columns:1.2fr .8fr;
+gap:35px;
+}
+
+.status-panel{
+padding:35px;
+}
+
+.status-line{
+margin-bottom:28px;
+}
+
+.status-line .top{
+display:flex;
+justify-content:space-between;
+margin-bottom:12px;
+font-weight:600;
+}
+
+.progress{
+height:12px;
+background:rgba(255,255,255,.06);
+border-radius:50px;
 overflow:hidden;
-border:3px solid rgba(59,130,246,.5);
-box-shadow:0 0 25px rgba(59,130,246,.4);
-margin-bottom:20px;
 }
 
-.avatar img{
-width:100%;
+.progress span{
+display:block;
 height:100%;
-object-fit:cover;
+border-radius:50px;
+background:linear-gradient(90deg,var(--primary),var(--cyan));
+box-shadow:0 0 25px rgba(59,130,246,.5);
 }
 
-.staff-card h3{
-margin-bottom:10px;
-font-size:1.3rem;
+.server-box{
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:50px;
 }
 
-.role{
+.server-box h3{
+font-size:4rem;
+font-family:'Orbitron';
+color:#93c5fd;
+}
+
+.live-dot{
+width:14px;
+height:14px;
+border-radius:50%;
+background:var(--success);
+box-shadow:0 0 15px var(--success);
+animation:pulse 1.5s infinite;
 display:inline-block;
-padding:8px 18px;
-border-radius:12px;
-font-size:13px;
+margin-right:10px;
+}
+
+@keyframes pulse{
+0%{
+transform:scale(1);
+opacity:1;
+}
+100%{
+transform:scale(1.8);
+opacity:0;
+}
+}
+
+.rules-container{
+display:grid;
+gap:18px;
+max-width:1100px;
+margin:auto;
+}
+
+.rule-item{
+overflow:hidden;
+}
+
+.rule-header{
+padding:25px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+cursor:pointer;
 font-weight:700;
-margin-top:8px;
+font-size:1.05rem;
 }
 
-.dueno{
-background:#dc2626;
+.rule-content{
+max-height:0;
+overflow:hidden;
+transition:max-height .5s ease;
+padding:0 25px;
 }
 
-.codueno{
-background:#2563eb;
+.rule-content p{
+padding-bottom:25px;
+color:var(--gray);
+line-height:1.9;
 }
 
-.admin{
-background:#7c3aed;
+.rule-item.active .rule-content{
+max-height:300px;
 }
 
-/* DISCORD */
+.store-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:30px;
+}
+
+.store-card{
+padding:40px;
+position:relative;
+overflow:hidden;
+transition:.4s;
+}
+
+.store-card:hover{
+transform:translateY(-12px) scale(1.02);
+}
+
+.store-card::after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(
+135deg,
+rgba(59,130,246,.15),
+transparent
+);
+opacity:0;
+transition:.4s;
+}
+
+.store-card:hover::after{
+opacity:1;
+}
+
+.price{
+font-size:3rem;
+font-family:'Orbitron';
+margin:25px 0;
+color:#93c5fd;
+}
+
+.store-list{
+list-style:none;
+display:flex;
+flex-direction:column;
+gap:14px;
+margin-bottom:30px;
+color:var(--gray);
+}
+
+.news-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+gap:30px;
+}
+
+.news-card{
+padding:35px;
+transition:.35s;
+}
+
+.news-card:hover{
+transform:translateY(-10px);
+}
+
+.news-date{
+display:inline-block;
+padding:8px 14px;
+background:rgba(59,130,246,.12);
+border-radius:30px;
+margin-bottom:18px;
+color:#93c5fd;
+font-size:.85rem;
+}
+
+.discord-section{
+text-align:center;
+}
 
 .discord-box{
-max-width:850px;
+max-width:1000px;
 margin:auto;
-background:linear-gradient(145deg,#111827,#0f172a);
-padding:60px;
-border-radius:30px;
-border:1px solid rgba(255,255,255,.08);
-position:relative;
-overflow:hidden;
-}
-
-.discord-box::before{
-content:"";
-position:absolute;
-width:350px;
-height:350px;
-background:rgba(59,130,246,.18);
-border-radius:50%;
-filter:blur(100px);
-top:-120px;
-right:-120px;
+padding:70px;
 }
 
 .discord-box h2{
-font-size:3rem;
+font-size:4rem;
 font-family:'Orbitron';
 margin-bottom:20px;
 }
 
 .discord-box p{
-color:var(--gris);
-line-height:1.8;
-max-width:650px;
+max-width:700px;
 margin:auto;
+line-height:1.9;
+color:var(--gray);
 }
-
-.discord-box button{
-margin-top:35px;
-padding:16px 45px;
-border:none;
-border-radius:14px;
-font-weight:700;
-font-size:16px;
-cursor:pointer;
-background:linear-gradient(135deg,var(--azul),var(--azul2));
-color:white;
-transition:.3s;
-box-shadow:0 0 35px rgba(59,130,246,.45);
-}
-
-.discord-box button:hover{
-transform:translateY(-6px) scale(1.03);
-}
-
-/* FOOTER */
 
 footer{
 padding:35px;
 text-align:center;
-color:var(--gris);
-border-top:1px solid rgba(255,255,255,.05);
+border-top:1px solid rgba(255,255,255,.06);
 background:#020617;
+color:var(--gray);
 }
 
-/* ANIMATIONS */
+@media(max-width:1100px){
 
-.fade{
-opacity:0;
-transform:translateY(40px);
-transition:1s;
+.server-status{
+grid-template-columns:1fr;
 }
-
-.fade.show{
-opacity:1;
-transform:translateY(0px);
-}
-
-@keyframes fadeUp{
-from{
-opacity:0;
-transform:translateY(40px);
-}
-to{
-opacity:1;
-transform:translateY(0px);
-}
-}
-
-/* MOBILE */
-
-@media(max-width:900px){
 
 .hero h1{
-font-size:3rem;
-}
-
-nav{
-padding:18px 5%;
-}
-
-nav ul{
-gap:18px;
-font-size:14px;
-}
-
-.stats{
-gap:15px;
-}
-
-.stat-box{
-min-width:140px;
-padding:20px;
-}
-
-section{
-padding:100px 6%;
-}
-
-.discord-box{
-padding:40px 25px;
+font-size:4.5rem;
 }
 
 }
 
-@media(max-width:700px){
+@media(max-width:800px){
 
-nav ul{
+.nav-links{
 display:none;
 }
 
 .hero h1{
+font-size:3rem;
+letter-spacing:4px;
+}
+
+.section-title h2{
+font-size:2.5rem;
+}
+
+.discord-box{
+padding:45px 25px;
+}
+
+.discord-box h2{
 font-size:2.5rem;
 }
 
 .hero-logo{
-width:280px;
-}
-
-.section-title h2{
-font-size:2.2rem;
+width:300px;
 }
 
 }
 
 </style>
 </head>
-
 <body>
 
-<div class="particles">
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-<span></span>
+<div class="preloader">
+<img class="loader-logo" src="https://media.discordapp.net/attachments/1472555842925629491/1506290848466341999/almeria_rp_logo.png?ex=6a13a8eb&is=6a12576b&hm=5296b7c9b71550e0d1c143308cb8ea1375abafae4309c9f477620273daa0d4f0&=&format=webp&quality=lossless&width=1330&height=887">
+<div class="loading-bar">
 <span></span>
 </div>
+</div>
 
-<nav>
+<div id="tsparticles"></div>
+
+<nav class="navbar">
 
 <div class="logo">
-<img src="https://media.discordapp.net/attachments/1471257720698175502/1475081153299091487/almeria_rp_logo.png">
+<img src="https://media.discordapp.net/attachments/1472555842925629491/1506290848466341999/almeria_rp_logo.png?ex=6a13a8eb&is=6a12576b&hm=5296b7c9b71550e0d1c143308cb8ea1375abafae4309c9f477620273daa0d4f0&=&format=webp&quality=lossless&width=1330&height=887">
 ALMERÍA RP
 </div>
 
-<ul>
+<ul class="nav-links">
 <li><a href="#inicio">Inicio</a></li>
-<li><a href="#ofrecemos">Servidor</a></li>
-<li><a href="#staff">Staff</a></li>
+<li><a href="#features">Servidor</a></li>
+<li><a href="#estado">Estado</a></li>
+<li><a href="#normativa">Normativa</a></li>
+<li><a href="#news">Noticias</a></li>
 <li><a href="#discord" class="discord-btn">Discord</a></li>
 </ul>
 
@@ -633,130 +775,50 @@ ALMERÍA RP
 
 <section class="hero" id="inicio">
 
-<h1>ALMERÍA <span>RP</span></h1>
-<h1 {style="font-size:0.3rem; margin-bottom:60px; color:var(--azulGlow); font-family:'Retroica'; letter-spacing:3px; animation:fadeUp 1.6s ease;">COMUNIDAD</h1>
+<div class="hero-content" data-aos="zoom-in">
 
+<img class="hero-logo" src="https://media.discordapp.net/attachments/1472555842925629491/1506290848466341999/almeria_rp_logo.png?ex=6a13a8eb&is=6a12576b&hm=5296b7c9b71550e0d1c143308cb8ea1375abafae4309c9f477620273daa0d4f0&=&format=webp&quality=lossless&width=1330&height=887">
+
+<h1>ALMERÍA RP</h1>
 
 <p>
-La experiencia definitiva de roleplay serio, profesional y realista.
-Un servidor diseñado para ofrecer calidad, organización y diversión.
+La nueva generación del Roleplay serio en ERLC.
+Una experiencia inmersiva, cinematográfica y profesional diseñada para jugadores que buscan calidad, realismo y una comunidad verdaderamente activa.
 </p>
 
 <div class="hero-buttons">
 
-<button class="primary-btn" onclick="scrollToSection('discord')">
+<button class="btn primary" onclick="window.location.href='https://discord.gg/wuTkHxs8Tz'">
 ENTRAR AL DISCORD
 </button>
 
-<button class="secondary-btn" onclick="scrollToSection('ofrecemos')">
-VER MÁS
+<button class="btn secondary" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">
+EXPLORAR SERVIDOR
 </button>
 
 </div>
 
-<div class="stats">
+<div class="hero-stats">
 
-<div class="stat-box">
+<div class="glass-card stat-card">
 <h2>24/7</h2>
-<p>Servidor activo</p>
+<p>Infraestructura online permanente con monitoreo inteligente.</p>
 </div>
 
-<div class="stat-box">
-<h2>+100</h2>
-<p>Usuarios diarios</p>
+<div class="glass-card stat-card">
+<h2>128</h2>
+<p>Slots optimizados con rendimiento avanzado y estabilidad.</p>
 </div>
 
-<div class="stat-box">
-<h2>TOP</h2>
-<p>Experiencia RP</p>
+<div class="glass-card stat-card">
+<h2>+10K</h2>
+<p>Horas acumuladas de roleplay dentro de la comunidad.</p>
 </div>
 
+<div class="glass-card stat-card">
+<h2>99.9%</h2>
+<p>Disponibilidad de sistemas y servicios internos.</p>
 </div>
-
-</section>
-
-<section id="ofrecemos">
-
-<div class="section-title fade">
-<h2>¿Qué Ofrecemos?</h2>
-<p>Un entorno realista y profesional.</p>
-</div>
-
-<div class="grid">
-
-<div class="card fade">
-<h3>🎭 Roleplay Realista</h3>
-<p>
-Normativas avanzadas, sistemas optimizados y una comunidad seria enfocada en el roleplay de calidad.
-</p>
-</div>
-
-<div class="card fade">
-<h3>🚔 Trabajos Oficiales</h3>
-<p>
-Policía, EMS, mecánicos, empresas privadas y muchas más oportunidades para desarrollar tu personaje.
-</p>
-</div>
-
-<div class="card fade">
-<h3>🎉 Eventos Exclusivos</h3>
-<p>
-Conciertos, carreras ilegales, eventos administrativos y experiencias únicas todas las semanas.
-</p>
-</div>
-
-</div>
-
-</section>
-
-<section id="staff">
-
-<div class="section-title fade">
-<h2>Nuestro Staff</h2>
-<p>El equipo encargado de mantener la calidad del servidor.</p>
-</div>
-
-<div class="staff-grid">
-
-<div class="staff-card fade">
-
-<div class="avatar">
-<img src="https://media.discordapp.net/attachments/1462127114294919445/1476941705214427249/copilot_image_1771776740612.jpg">
-</div>
-
-<h3>Policia_091</h3>
-
-<span class="role dueno">
-DUEÑO
-</span>
-
-</div>
-
-<div class="staff-card fade">
-
-<div class="avatar">
-<img src="https://media.discordapp.net/attachments/1448051369377267793/1475084244672839820/IMG_2645.jpg">
-</div>
-
-<h3>Kuemiritas</h3>
-
-<span class="role codueno">
-CO DUEÑO
-</span>
-
-</div>
-
-<div class="staff-card fade">
-
-<div class="avatar">
-<img src="https://media.discordapp.net/attachments/1448051369377267793/1475084244672839820/IMG_2645.jpg">
-</div>
-
-<h3>Raúl</h3>
-
-<span class="role admin">
-ADMIN
-</span>
 
 </div>
 
@@ -764,99 +826,414 @@ ADMIN
 
 </section>
 
-<section id="discord">
+<section id="features">
 
-<div class="discord-box fade">
-
-<h2>ÚNETE AHORA</h2>
-
+<div class="section-title" data-aos="fade-up">
+<span>EXPERIENCIA PREMIUM</span>
+<h2>¿Qué Hace Único a Almería RP?</h2>
 <p>
-Forma parte de una de las comunidades de roleplay más profesionales y activas.
-Tu historia comienza aquí.
+Un ecosistema roleplay diseñado con enfoque cinematográfico, sistemas avanzados y una comunidad enfocada en el roleplay serio y profesional.
+</p>
+</div>
+
+<div class="features-grid">
+
+<div class="glass-card feature-card" data-aos="fade-up">
+<div class="feature-icon">🎭</div>
+<h3>Roleplay Realista</h3>
+<p>
+Normativas avanzadas, economía balanceada y situaciones totalmente inmersivas que elevan el nivel del RP.
+</p>
+</div>
+
+<div class="glass-card feature-card" data-aos="fade-up" data-aos-delay="100">
+<div class="feature-icon">🚔</div>
+<h3>Facciones Oficiales</h3>
+<p>
+Policía, EMS, mecánicos, gobierno y empresas privadas totalmente configuradas para experiencias realistas.
+</p>
+</div>
+
+<div class="glass-card feature-card" data-aos="fade-up" data-aos-delay="200">
+<div class="feature-icon">🌆</div>
+<h3>Mapeados Exclusivos</h3>
+<p>
+Interiores premium, zonas personalizadas y ambientación visual de nueva generación.
+</p>
+</div>
+
+<div class="glass-card feature-card" data-aos="fade-up">
+<div class="feature-icon">🎉</div>
+<h3>Eventos Semanales</h3>
+<p>
+Conciertos, carreras ilegales, operativos especiales y experiencias narrativas únicas.
+</p>
+</div>
+
+<div class="glass-card feature-card" data-aos="fade-up" data-aos-delay="100">
+<div class="feature-icon">💎</div>
+<h3>Sistemas Premium</h3>
+<p>
+Inventarios avanzados, vehículos exclusivos y scripts optimizados de alta calidad.
+</p>
+</div>
+
+<div class="glass-card feature-card" data-aos="fade-up" data-aos-delay="200">
+<div class="feature-icon">⚡</div>
+<h3>Optimización Total</h3>
+<p>
+FPS estables, sincronización avanzada y experiencia fluida incluso en situaciones intensas.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="estado">
+
+<div class="section-title" data-aos="fade-up">
+<span>MONITOREO EN TIEMPO REAL</span>
+<h2>Estado del Servidor</h2>
+<p>
+Visualización dinámica simulando conexión API ERLC con métricas en vivo y servicios internos.
+</p>
+</div>
+
+<div class="server-status">
+
+<div class="glass-card status-panel" data-aos="fade-right">
+
+<div class="status-line">
+<div class="top">
+<span>Jugadores Online</span>
+<span id="playersText">94/128</span>
+</div>
+<div class="progress">
+<span id="playersBar" style="width:73%"></span>
+</div>
+</div>
+
+<div class="status-line">
+<div class="top">
+<span>Servidor Principal</span>
+<span style="color:#22c55e;">ONLINE</span>
+</div>
+<div class="progress">
+<span style="width:100%;background:linear-gradient(90deg,#22c55e,#4ade80);"></span>
+</div>
+</div>
+
+<div class="status-line">
+<div class="top">
+<span>Base de Datos</span>
+<span style="color:#22c55e;">ESTABLE</span>
+</div>
+<div class="progress">
+<span style="width:96%;background:linear-gradient(90deg,#22c55e,#4ade80);"></span>
+</div>
+</div>
+
+<div class="status-line">
+<div class="top">
+<span>Auth Services</span>
+<span style="color:#facc15;">LATENCIA BAJA</span>
+</div>
+<div class="progress">
+<span style="width:89%;background:linear-gradient(90deg,#facc15,#fde047);"></span>
+</div>
+</div>
+
+</div>
+
+<div class="glass-card server-box" data-aos="fade-left">
+
+<p><span class="live-dot"></span>SISTEMA ACTIVO</p>
+
+<h3 id="livePlayers">94</h3>
+
+<p style="margin-top:10px;color:var(--gray)">
+Jugadores conectados actualmente en Almería RP.
 </p>
 
-<button onclick="window.location.href='https://discord.gg/wuTkHxs8Tz'">
+</div>
+
+</div>
+
+</section>
+
+<section id="normativa">
+
+<div class="section-title" data-aos="fade-up">
+<span>NORMATIVA INTERACTIVA</span>
+<h2>Reglas Fundamentales</h2>
+<p>
+Consulta rápidamente las normativas más importantes del servidor mediante un sistema interactivo moderno.
+</p>
+</div>
+
+<div class="rules-container">
+
+<div class="glass-card rule-item active" data-aos="fade-up">
+<div class="rule-header">
+<span>📜 Metagaming y Powergaming</span>
+<span>+</span>
+</div>
+<div class="rule-content">
+<p>
+Está totalmente prohibido utilizar información externa dentro del personaje o forzar acciones irreales sobre otros jugadores.
+</p>
+</div>
+</div>
+
+<div class="glass-card rule-item" data-aos="fade-up">
+<div class="rule-header">
+<span>🚔 Conducta en Entornos Oficiales</span>
+<span>+</span>
+</div>
+<div class="rule-content">
+<p>
+Toda actuación policial, EMS o gubernamental debe mantener un nivel serio y profesional dentro del rol.
+</p>
+</div>
+</div>
+
+<div class="glass-card rule-item" data-aos="fade-up">
+<div class="rule-header">
+<span>💥 Zonas Seguras y Eventos</span>
+<span>+</span>
+</div>
+<div class="rule-content">
+<p>
+Las zonas seguras deben respetarse en todo momento. Los eventos oficiales tendrán reglas específicas anunciadas previamente.
+</p>
+</div>
+</div>
+
+<div class="glass-card rule-item" data-aos="fade-up">
+<div class="rule-header">
+<span>🎭 Interpretación de Personaje</span>
+<span>+</span>
+</div>
+<div class="rule-content">
+<p>
+Se exige coherencia narrativa y comportamiento acorde al entorno roleplay del servidor.
+</p>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<section id="tienda">
+
+<div class="section-title" data-aos="fade-up">
+</section>
+
+<section id="news">
+
+<div class="section-title" data-aos="fade-up">
+<span>ÚLTIMAS ACTUALIZACIONES</span>
+<h2>Noticias & Changelog</h2>
+<p>
+Mantente informado sobre las últimas novedades, sistemas y mejoras implementadas.
+</p>
+</div>
+
+<div class="news-grid">
+
+<div class="glass-card news-card" data-aos="fade-up">
+<div class="news-date">24 MAY 2026</div>
+<h3>Nueva Temporada de Verano</h3>
+<p style="margin-top:15px;color:var(--gray);line-height:1.8;">
+Se añadieron eventos especiales, conciertos RP y nuevas zonas de ocio exclusivas.
+</p>
+</div>
+
+<div class="glass-card news-card" data-aos="fade-up" data-aos-delay="120">
+<div class="news-date">18 MAY 2026</div>
+<h3>Optimización General</h3>
+<p style="margin-top:15px;color:var(--gray);line-height:1.8;">
+Mejorado el rendimiento del servidor y reducida la latencia en situaciones masivas.
+</p>
+</div>
+
+<div class="glass-card news-card" data-aos="fade-up" data-aos-delay="240">
+<div class="news-date">10 MAY 2026</div>
+<h3>Sistema de Economía Renovado</h3>
+<p style="margin-top:15px;color:var(--gray);line-height:1.8;">
+Nueva economía dinámica y balance total de negocios, salarios y actividades ilegales.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="discord-section" id="discord">
+
+<div class="glass-card discord-box" data-aos="zoom-in">
+
+<h2>ÚNETE A ALMERÍA RP</h2>
+
+<p>
+Accede ahora mismo a la comunidad y comienza tu historia dentro de una experiencia roleplay de nueva generación.
+</p>
+
+<div class="hero-buttons">
+
+<button class="btn primary" onclick="window.location.href='https://discord.gg/wuTkHxs8Tz'">
 ENTRAR AL DISCORD
 </button>
+
+<button class="btn secondary">
+CONECTAR AL SERVIDOR
+</button>
+
+</div>
 
 </div>
 
 </section>
 
 <footer>
-© 2026 Almería RP — Todos los derechos reservados
+© 2026 ALMERÍA RP — NEXT GENERATION ROLEPLAY EXPERIENCE
 </footer>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
 <script>
 
-/* SCROLL */
-
-function scrollToSection(id){
-
-const el = document.getElementById(id);
-
-const y = el.getBoundingClientRect().top + window.pageYOffset - 90;
-
-window.scrollTo({
-top:y,
-behavior:"smooth"
+AOS.init({
+duration:1000,
+once:true
 });
 
+window.addEventListener("load",()=>{
+
+setTimeout(()=>{
+document.querySelector(".preloader").classList.add("hide");
+},1800);
+
+});
+
+tsParticles.load("tsparticles",{
+fpsLimit:60,
+background:{color:"transparent"},
+particles:{
+number:{
+value:85
+},
+color:{
+value:["#3b82f6","#60a5fa","#93c5fd"]
+},
+shape:{
+type:"circle"
+},
+opacity:{
+value:.45
+},
+size:{
+value:{min:1,max:4}
+},
+links:{
+enable:true,
+distance:140,
+color:"#3b82f6",
+opacity:.18,
+width:1
+},
+move:{
+enable:true,
+speed:1.2
 }
-
-/* NAV LINKS */
-
-document.querySelectorAll('nav a').forEach(anchor=>{
-
-anchor.addEventListener('click', function(e){
-
-e.preventDefault();
-
-const id = this.getAttribute('href').replace('#','');
-
-scrollToSection(id);
-
-});
-
-});
-
-/* SCROLL ANIMATIONS */
-
-const observer = new IntersectionObserver(entries=>{
-
-entries.forEach(entry=>{
-
-if(entry.isIntersecting){
-
-entry.target.classList.add('show');
-
+},
+interactivity:{
+events:{
+onHover:{
+enable:true,
+mode:"grab"
 }
-
-});
-
-},{threshold:.15});
-
-document.querySelectorAll('.fade').forEach(el=>{
-
-observer.observe(el);
-
-});
-
-/* NAV BACKGROUND */
-
-window.addEventListener("scroll",()=>{
-
-const nav = document.querySelector("nav");
-
-if(window.scrollY > 50){
-
-nav.style.background = "rgba(2,6,23,0.88)";
-
-}else{
-
-nav.style.background = "rgba(2,6,23,0.65)";
-
+},
+modes:{
+grab:{
+distance:180,
+links:{
+opacity:.45
 }
+}
+}
+}
+});
+
+document.querySelectorAll(".rule-header").forEach(header=>{
+
+header.addEventListener("click",()=>{
+
+const item = header.parentElement;
+
+document.querySelectorAll(".rule-item").forEach(el=>{
+if(el !== item){
+el.classList.remove("active");
+}
+});
+
+item.classList.toggle("active");
+
+});
+
+});
+
+let players = 94;
+
+setInterval(()=>{
+
+const random = Math.floor(Math.random()*8)-3;
+
+players += random;
+
+if(players < 70) players = 70;
+if(players > 128) players = 128;
+
+document.getElementById("livePlayers").textContent = players;
+document.getElementById("playersText").textContent = `${players}/128`;
+
+const percent = (players/128)*100;
+
+document.getElementById("playersBar").style.width = percent + "%";
+
+},3000);
+
+document.querySelectorAll(".feature-card, .store-card, .stat-card").forEach(card=>{
+
+card.addEventListener("mousemove",(e)=>{
+
+const rect = card.getBoundingClientRect();
+
+const x = e.clientX - rect.left;
+const y = e.clientY - rect.top;
+
+const rotateY = ((x / rect.width)-0.5)*12;
+const rotateX = ((y / rect.height)-0.5)*-12;
+
+card.style.transform = `
+rotateX(${rotateX}deg)
+rotateY(${rotateY}deg)
+translateY(-8px)
+`;
+
+});
+
+card.addEventListener("mouseleave",()=>{
+
+card.style.transform = `
+rotateX(0deg)
+rotateY(0deg)
+translateY(0px)
+`;
+
+});
 
 });
 
